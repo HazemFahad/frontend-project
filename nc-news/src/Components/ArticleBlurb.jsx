@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
-  const params = useParams();
+  let params = useParams();
   console.log(params);
 
   useEffect(() => {
@@ -64,12 +64,10 @@ function ArticleBlurb() {
               <p>{article.body}</p>
               <p>Votes: {article.votes}</p>
               <p>Topic: {article.topic}</p>
-              <a href={topicLink}>
+              <Link to={topicLink} className="Topic__link">
                 <button>Related Articles</button>
-              </a>
-              <a>
-                <button>Read Full Article</button>
-              </a>
+              </Link>
+              <button>Read Full Article</button>
             </li>
           );
         })}

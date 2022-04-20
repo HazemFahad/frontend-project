@@ -44,3 +44,14 @@
   padding: 10px;
   list-style: none;
 }
+
+.Users__header,
+.Users__list,
+.Users_card {
+  padding: 10px;
+  margin: 20px;
+}
+
+.Users_card {
+  list-style: none;
+}

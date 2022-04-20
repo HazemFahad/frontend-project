@@ -26,7 +26,7 @@ const Users = () => {
 
   return (
     <section>
-      <h1>Users</h1>
+      <h1 className="Users__header">Users</h1>
       <ul className="Users__list">
         {users.map((user) => {
           return (
