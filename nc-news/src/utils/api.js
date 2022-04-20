@@ -23,9 +23,15 @@ export const getArticles = () => {
   });
 };
 
+export const getSingleArticle = (article_id) => {
+  return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
+    console.log(data);
+    return data.article;
+  });
+};
+
 export const getTopics = () => {
   return newsApi.get(`/topics`).then(({ data }) => {
-    console.log(data.topics);
     return data.topics;
   });
 };
