@@ -1,0 +1,57 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: auto;
+  min-height: 600px;
+  text-align: center;
+  margin: 128px auto;
+  border-radius: 10px;
+  padding-bottom: 32px;
+  padding: 30px;
+}
+
+.Nav__link,
+.Topic__link {
+  margin: 20px;
+  padding: 10px;
+}
+
+.Nav__Avatar__img {
+  height: 50px;
+  padding: 10px;
+  margin: 20px;
+}
+
+.NavBar {
+  margin: 50px;
+}
+
+.Topic__bar {
+  margin: 50px;
+}
+
+.Article__blurb {
+  margin: 20px;
+  padding: 10px;
+  list-style: none;
+}
+
+.Users__header,
+.Users__list,
+.Users_card {
+  padding: 10px;
+  margin: 20px;
+}
+
+.Users_card {
+  list-style: none;
+}
