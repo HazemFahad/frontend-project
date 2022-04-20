@@ -58,6 +58,7 @@ function ArticleBlurb() {
       <ul>
         {articles.map((article) => {
           const topicLink = `/${article.topic}`;
+          const articleLink = `/article/${article.article_id}`;
           return (
             <li key={article.article_id} className="Article__blurb">
               <h3>{article.title}</h3>
@@ -67,7 +68,9 @@ function ArticleBlurb() {
               <Link to={topicLink} className="Topic__link">
                 <button>Related Articles</button>
               </Link>
-              <button>Read Full Article</button>
+              <Link to={articleLink} className="Article__link">
+                <button>Read Full Article</button>
+              </Link>
             </li>
           );
         })}
