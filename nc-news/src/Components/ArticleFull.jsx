@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getSingleArticle } from "../utils/api";
+import { getArticleById } from "../utils/api";
 import { useParams } from "react-router-dom";
 import useCount from "../Hooks/useCount";
 import { patchArticle } from "../utils/api";
+import CommentList from "./CommentList";
 
 function ArticleFull() {
   const [article, setArticle] = useState({});
   const [err, setErr] = useState("");
   const voteCount = useCount();
-  // const updateCount = useCount();
 
   let params = useParams();
 
   useEffect(() => {
-    getSingleArticle(params.article_id)
+    getArticleById(params.article_id)
       .then((article) => {
         setArticle(article);
         voteCount.setCount(article.votes);
@@ -65,6 +65,7 @@ function ArticleFull() {
       <Link to={topicLink} className="Topic__link">
         <button>Related Articles</button>
       </Link>
+      <CommentList />
     </section>
   );
 }
