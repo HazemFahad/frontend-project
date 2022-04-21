@@ -1,37 +1,71 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { getSingleArticle, getTopics } from "../utils/api";
+import { getSingleArticle } from "../utils/api";
 import { useParams } from "react-router-dom";
+import useCount from "../Hooks/useCount";
+import { patchArticle } from "../utils/api";
 
 function ArticleFull() {
   const [article, setArticle] = useState({});
-  // const [topics, setTopics] = useState([]);
+  const [err, setErr] = useState("");
+  const voteCount = useCount();
+  // const updateCount = useCount();
 
   let params = useParams();
-  console.log(params);
 
   useEffect(() => {
     getSingleArticle(params.article_id)
       .then((article) => {
         setArticle(article);
+        voteCount.setCount(article.votes);
       })
       .catch((err) => {
-        console.log(err);
+        setErr("Article not found!");
       });
   }, [params.article_id]);
 
+  const updateVotes = (article_id, updateCount) => {
+    if (updateCount === 1) {
+      voteCount.incCount();
+    } else {
+      voteCount.decCount();
+    }
+    patchArticle(article_id, updateCount);
+  };
+
   const topicLink = `/${article.topic}`;
 
+  if (err) {
+    return (
+      <section className="Full__article">
+        <p>{err}</p>
+      </section>
+    );
+  }
   return (
-    <div>
+    <section className="Full__article">
       <h3>{article.title}</h3>
       <p>{article.body}</p>
-      <p>Votes: {article.votes}</p>
+      <p>Votes: {voteCount.count}</p>
       <p>Topic: {article.topic}</p>
+      <button
+        onClick={() => {
+          updateVotes(params.article_id, 1);
+        }}
+      >
+        Upvote
+      </button>
+      <button
+        onClick={() => {
+          updateVotes(params.article_id, -1);
+        }}
+      >
+        Downvote
+      </button>
       <Link to={topicLink} className="Topic__link">
         <button>Related Articles</button>
       </Link>
-    </div>
+    </section>
   );
 }
 

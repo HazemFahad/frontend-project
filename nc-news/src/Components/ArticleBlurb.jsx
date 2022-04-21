@@ -7,7 +7,14 @@ function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
   const [topics, setTopics] = useState([]);
   let params = useParams();
-  console.log(params);
+
+  /*can pass 'topic' as a parameter here and do the 'filtering' for topics here
+e.g if topic exists then add a query to the path ("/api/articles/?topic=£{topic}
+then you wouldn't need all the filter logic in ArticleBlurb */
+
+  /* 
+could make use of useParams here and pass into getArticles a topic (please see api in utils for more info)
+*/
 
   useEffect(() => {
     getArticles()
@@ -36,7 +43,6 @@ function ArticleBlurb() {
       });
   }, []);
 
-  //   console.log(articles);
   return (
     <main>
       <h3>Filter By:</h3>
@@ -64,6 +70,7 @@ function ArticleBlurb() {
               <h3>{article.title}</h3>
               <p>{article.body}</p>
               <p>Votes: {article.votes}</p>
+              <p>Author: {article.author}</p>
               <p>Topic: {article.topic}</p>
               <Link to={topicLink} className="Topic__link">
                 <button>Related Articles</button>

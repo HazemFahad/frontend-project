@@ -35,3 +35,11 @@ export const getTopics = () => {
     return data.topics;
   });
 };
+
+export const patchArticle = (article_id, updateCount) => {
+  newsApi
+    .patch(`/articles/${article_id}`, { inc_votes: updateCount })
+    .then(({ data }) => {
+      return data.article;
+    });
+};
