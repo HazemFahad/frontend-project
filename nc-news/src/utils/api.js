@@ -43,7 +43,22 @@ export const patchArticle = (article_id, updateCount) => {
 };
 
 export const getCommentsById = (article_id) => {
-  return newsApi.get(`articles/${article_id}/comments`).then(({ data }) => {
+  return newsApi.get(`/articles/${article_id}/comments`).then(({ data }) => {
     return data.comments;
   });
+};
+
+export const postComment = (article_id, username, body) => {
+  console.log(article_id, username, body);
+
+  return newsApi
+
+    .post(`/articles/${article_id}/comments`, {
+      username: username,
+      body: body,
+    })
+    .then(({ data }) => {
+      console.log(data);
+      return data;
+    });
 };

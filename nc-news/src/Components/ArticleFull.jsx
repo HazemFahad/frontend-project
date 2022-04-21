@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import useCount from "../Hooks/useCount";
 import { patchArticle } from "../utils/api";
 import CommentList from "./CommentList";
+import PostComment from "./PostComment";
 
 function ArticleFull() {
   const [article, setArticle] = useState({});
@@ -65,6 +66,7 @@ function ArticleFull() {
       <Link to={topicLink} className="Topic__link">
         <button>Related Articles</button>
       </Link>
+      <PostComment />
       <CommentList />
     </section>
   );

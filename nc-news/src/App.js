@@ -1,7 +1,5 @@
 import "./App.css";
 import NavBar from "./Components/NavBar";
-import { UserContext } from "./Contexts/User";
-import { useState } from "react";
 import Users from "./Components/Users";
 import ArticleBlurb from "./Components/ArticleBlurb";
 import ArticleFull from "./Components/ArticleFull";
@@ -16,10 +14,6 @@ function App() {
         <Route path="/users" element={<Users />}></Route>
         <Route path="/:topic" element={<ArticleBlurb />}></Route>
         <Route path="article/:article_id" element={<ArticleFull />}></Route>
-        <Route
-          path="article/:article_id/comments"
-          element={<ArticleFull />}
-        ></Route>
       </Routes>
     </div>
   );
