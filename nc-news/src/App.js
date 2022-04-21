@@ -16,6 +16,10 @@ function App() {
         <Route path="/users" element={<Users />}></Route>
         <Route path="/:topic" element={<ArticleBlurb />}></Route>
         <Route path="article/:article_id" element={<ArticleFull />}></Route>
+        <Route
+          path="article/:article_id/comments"
+          element={<ArticleFull />}
+        ></Route>
       </Routes>
     </div>
   );
