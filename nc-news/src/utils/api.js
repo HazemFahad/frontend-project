@@ -6,7 +6,6 @@ const newsApi = axios.create({
 
 export const getUsers = () => {
   return newsApi.get("/users").then(({ data }) => {
-    console.log(data.users);
     return data.users;
   });
 };
@@ -23,9 +22,8 @@ export const getArticles = () => {
   });
 };
 
-export const getSingleArticle = (article_id) => {
+export const getArticleById = (article_id) => {
   return newsApi.get(`/articles/${article_id}`).then(({ data }) => {
-    console.log(data);
     return data.article;
   });
 };
@@ -37,9 +35,15 @@ export const getTopics = () => {
 };
 
 export const patchArticle = (article_id, updateCount) => {
-  newsApi
+  return newsApi
     .patch(`/articles/${article_id}`, { inc_votes: updateCount })
     .then(({ data }) => {
       return data.article;
     });
+};
+
+export const getCommentsById = (article_id) => {
+  return newsApi.get(`articles/${article_id}/comments`).then(({ data }) => {
+    return data.comments;
+  });
 };
