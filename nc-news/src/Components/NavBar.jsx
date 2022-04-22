@@ -11,7 +11,7 @@ function NavBar() {
         <NavLink to="/" className="Nav__link">
           NC News
         </NavLink>
-        <NavLink to="" className="Nav__link">
+        <NavLink to="/post" className="Nav__link">
           Post Article
         </NavLink>
         <NavLink to="/users" className="Nav__link">

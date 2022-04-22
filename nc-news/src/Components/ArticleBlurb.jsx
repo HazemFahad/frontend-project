@@ -6,6 +6,8 @@ import TopicBar from "./TopicBar";
 
 function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
+  const [err, setErr] = useState("");
+
   const [selectedSortBy, setSelectedSortBy] = useState("created_at");
   const [selectedOrder, setSelectedOrder] = useState("desc");
 
@@ -19,12 +21,17 @@ function ArticleBlurb() {
         setArticles(articleArr);
       })
       .catch((err) => {
-        console.log(err.response);
+        setErr("No articles match this topic!");
       });
   }, [params, selectedSortBy, selectedOrder, topicParam]);
 
-  console.log(selectedSortBy);
-
+  if (err) {
+    return (
+      <section className="Full__article">
+        <p>{err}</p>
+      </section>
+    );
+  }
   return (
     <main>
       <TopicBar />
