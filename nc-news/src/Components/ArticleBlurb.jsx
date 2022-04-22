@@ -6,37 +6,55 @@ import TopicBar from "./TopicBar";
 
 function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
-  let params = useParams();
+  const [selectedSortBy, setSelectedSortBy] = useState("created_at");
+  const [selectedOrder, setSelectedOrder] = useState("desc");
 
-  /*can pass 'topic' as a parameter here and do the 'filtering' for topics here
-e.g if topic exists then add a query to the path ("/api/articles/?topic=£{topic}
-then you wouldn't need all the filter logic in ArticleBlurb */
+  const params = useParams();
 
-  /* 
-could make use of useParams here and pass into getArticles a topic (please see api in utils for more info)
-*/
+  const topicParam = `&topic=${params.topic}` || "";
 
   useEffect(() => {
-    getArticles()
+    getArticles(topicParam, selectedSortBy, selectedOrder)
       .then((articleArr) => {
-        if (params.topic !== undefined) {
-          const filteredItems = articleArr.filter((article) => {
-            return article.topic.toLowerCase() === params.topic.toLowerCase();
-          });
-          setArticles(filteredItems);
-        } else {
-          setArticles(articleArr);
-        }
+        setArticles(articleArr);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [params]);
+  }, [params, selectedSortBy, selectedOrder, topicParam]);
+
+  console.log(selectedSortBy);
 
   return (
     <main>
       <TopicBar />
+      <section>
+        <label htmlFor="sort__by">Sort By:</label>
 
+        <select
+          value={selectedSortBy}
+          onChange={(e) => {
+            setSelectedSortBy(e.target.value);
+          }}
+          id="sort__by"
+        >
+          <option value="created_at">Date</option>
+          <option value="comment_count">Comment Count</option>
+          <option value="votes">Votes</option>
+        </select>
+        <label htmlFor="order">Order:</label>
+
+        <select
+          value={selectedOrder}
+          onChange={(e) => {
+            setSelectedOrder(e.target.value);
+          }}
+          id="order"
+        >
+          <option value="desc">Descending</option>
+          <option value="asc">Ascending</option>
+        </select>
+      </section>
       <ul>
         {articles.map((article) => {
           const topicLink = `/${article.topic}`;
@@ -48,6 +66,7 @@ could make use of useParams here and pass into getArticles a topic (please see a
               <p>Votes: {article.votes}</p>
               <p>Author: {article.author}</p>
               <p>Topic: {article.topic}</p>
+              <p>Comment Count: {article.comment_count}</p>
               <Link to={topicLink} className="Topic__link">
                 <button>Related Articles</button>
               </Link>

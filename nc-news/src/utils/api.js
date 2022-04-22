@@ -16,10 +16,12 @@ export const getUserByUsername = (username) => {
   });
 };
 
-export const getArticles = () => {
-  return newsApi.get(`/articles`).then(({ data }) => {
-    return data.article;
-  });
+export const getArticles = (topic, sort_by, order) => {
+  return newsApi
+    .get(`/articles?sort_by=${sort_by}&order=${order}${topic}`)
+    .then(({ data }) => {
+      return data.article;
+    });
 };
 
 export const getArticleById = (article_id) => {

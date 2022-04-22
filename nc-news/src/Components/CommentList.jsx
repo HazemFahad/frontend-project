@@ -18,17 +18,26 @@ function CommentList() {
       });
   }, [article_id, comments]);
 
+  if (err) {
+    return (
+      <section className="Comment__list">
+        <p>{err}</p>
+      </section>
+    );
+  }
   return (
-    <ul>
-      {comments.map((comment) => {
-        return (
-          <li key={comment.comment_id}>
-            <h4>{comment.author}</h4>
-            <p>{comment.body}</p>
-          </li>
-        );
-      })}
-    </ul>
+    <section className="Comment__list">
+      <ul>
+        {comments.map((comment) => {
+          return (
+            <li key={comment.comment_id}>
+              <h4>{comment.author}</h4>
+              <p>{comment.body}</p>
+            </li>
+          );
+        })}
+      </ul>
+    </section>
   );
 }
 
