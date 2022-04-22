@@ -11,7 +11,7 @@ function ArticleBlurb() {
 
   const params = useParams();
 
-  const topicParam = `&topic=${params.topic}` || "";
+  const topicParam = params.topic ? `&topic=${params.topic}` : "";
 
   useEffect(() => {
     getArticles(topicParam, selectedSortBy, selectedOrder)
@@ -19,7 +19,7 @@ function ArticleBlurb() {
         setArticles(articleArr);
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
       });
   }, [params, selectedSortBy, selectedOrder, topicParam]);
 
