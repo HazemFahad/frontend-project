@@ -16,10 +16,12 @@ export const getUserByUsername = (username) => {
   });
 };
 
-export const getArticles = () => {
-  return newsApi.get(`/articles`).then(({ data }) => {
-    return data.article;
-  });
+export const getArticles = (topic, sort_by, order) => {
+  return newsApi
+    .get(`/articles?sort_by=${sort_by}&order=${order}${topic}`)
+    .then(({ data }) => {
+      return data.article;
+    });
 };
 
 export const getArticleById = (article_id) => {
@@ -61,4 +63,10 @@ export const postComment = (article_id, username, body) => {
       console.log(data);
       return data;
     });
+};
+
+export const deleteCommentByID = (id) => {
+  return newsApi.delete(`/comments/${id}`).then((response) => {
+    console.log(response);
+  });
 };

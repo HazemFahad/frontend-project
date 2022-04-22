@@ -25,6 +25,8 @@ function ArticleFull() {
       });
   }, [params.article_id]);
 
+  console.log();
+
   const updateVotes = (article_id, updateCount) => {
     if (updateCount === 1) {
       voteCount.incCount();
