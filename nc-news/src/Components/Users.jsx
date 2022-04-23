@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UserContext } from "../Contexts/User";
 import { getUsers, getUserByUsername } from "../utils/api";
 import { useContext } from "react";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 
 const Users = () => {
   const { user, setUser } = useContext(UserContext);

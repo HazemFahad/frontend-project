@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { getCommentsById, deleteCommentByID } from "../utils/api";
 import { UserContext } from "../Contexts/User";
 import { useContext } from "react";
-import { Card, Button, ButtonGroup, Form, Row, Col } from "react-bootstrap";
+import { Card, Button } from "react-bootstrap";
 
 function CommentList() {
   const [comments, setComments] = useState([]);
