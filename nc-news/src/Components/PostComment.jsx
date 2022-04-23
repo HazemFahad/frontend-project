@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { postComment } from "../utils/api";
 import { UserContext } from "../Contexts/User";
 import { useContext } from "react";
+import { Button, Form } from "react-bootstrap";
 
 function PostComment() {
   const [newCommentBody, setNewCommentBody] = useState("");
@@ -33,22 +34,25 @@ function PostComment() {
   }
   return (
     <section className="Post_comment">
-      <form onSubmit={handleSubmit}>
-        <textarea
-          value={newCommentBody}
-          placeholder="Write Comment Here!"
-          rows="4"
-          cols="50"
-          required
-          onChange={(e) => {
-            setNewCommentBody(e.target.value);
-            setIsPosting(true);
-          }}
-        />
+      <Form onSubmit={handleSubmit}>
+        <Form.Group>
+          <Form.Control
+            as="textarea"
+            value={newCommentBody}
+            placeholder="Write Comment Here!"
+            rows="4"
+            cols="50"
+            required
+            onChange={(e) => {
+              setNewCommentBody(e.target.value);
+              setIsPosting(true);
+            }}
+          />
 
-        <button type="submit">Post Comment</button>
-        {isPosting ? null : <p>Comment Posted Successfully!</p>}
-      </form>
+          <Button type="submit">Post Comment</Button>
+          {isPosting ? null : <p>Comment Posted Successfully!</p>}
+        </Form.Group>
+      </Form>
     </section>
   );
 }

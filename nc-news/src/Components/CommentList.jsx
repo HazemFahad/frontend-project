@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getCommentsById, deleteCommentByID } from "../utils/api";
 import { UserContext } from "../Contexts/User";
 import { useContext } from "react";
+import { Card, Button, ButtonGroup, Form, Row, Col } from "react-bootstrap";
 
 function CommentList() {
   const [comments, setComments] = useState([]);
@@ -49,20 +50,24 @@ function CommentList() {
       <ul>
         {comments.map((comment) => {
           return (
-            <li key={comment.comment_id}>
-              <h4>{comment.author}</h4>
-              <p>{comment.body}</p>
-              {comment.author === user.username ? (
-                <button
-                  onClick={() => {
-                    deleteComment(comment.comment_id);
-                    setIsDeleting(false);
-                  }}
-                >
-                  Delete Comment
-                </button>
-              ) : null}
-              {isDeleting ? null : <p>Please wait - Deleting Comment!</p>}
+            <li key={comment.comment_id} className="Article__blurb">
+              <Card Card bg="light" text="dark">
+                <Card.Text>
+                  <b>{comment.author}</b> - {comment.body}
+                </Card.Text>
+                {comment.author === user.username ? (
+                  <Button
+                    variant="secondary"
+                    onClick={() => {
+                      deleteComment(comment.comment_id);
+                      setIsDeleting(false);
+                    }}
+                  >
+                    Delete Comment
+                  </Button>
+                ) : null}
+                {isDeleting ? null : <p>Please wait - Deleting Comment!</p>}
+              </Card>
             </li>
           );
         })}

@@ -3,9 +3,9 @@ import { postArticle } from "../utils/api";
 import { UserContext } from "../Contexts/User";
 import { useContext } from "react";
 import { getTopics } from "../utils/api";
+import { Button, Form } from "react-bootstrap";
 
 function PostArticle() {
-  const [articleResponse, setArticleResponse] = useState({});
   const [isPosting, setIsPosting] = useState(true);
   const [topics, setTopics] = useState([]);
   const [newTitle, setNewTitle] = useState("");
@@ -33,7 +33,6 @@ function PostArticle() {
         setNewTitle("");
         setNewTopic("");
         setNewArticleBody("");
-        setArticleResponse(newArticle);
       })
       .catch((err) => {
         setErr("Could not submit article - Please try again!");
@@ -49,20 +48,26 @@ function PostArticle() {
   }
 
   return (
-    <section className="Post_article">
-      <form onSubmit={handleSubmit}>
-        <textarea
+    <Form onSubmit={handleSubmit}>
+      <h1>Post An Article</h1>
+      <Form.Group>
+        <Form.Label>Article Title</Form.Label>
+        <Form.Control
+          as="textarea"
           value={newTitle}
           placeholder="Write Article Title Here!"
           rows="4"
-          cols="50"
           required
           onChange={(e) => {
             setNewTitle(e.target.value);
             setIsPosting(true);
           }}
-        />
-        <select
+        ></Form.Control>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Select a Topic</Form.Label>
+
+        <Form.Select
           value={newTopic}
           required
           onChange={(e) => {
@@ -77,22 +82,27 @@ function PostArticle() {
               </option>
             );
           })}
-        </select>
-        <textarea
+        </Form.Select>
+      </Form.Group>
+      <Form.Group>
+        <Form.Label>Write Your Article Below</Form.Label>
+
+        <Form.Control
+          as="textarea"
           value={newArticleBody}
           placeholder="Write Article Title Here!"
-          rows="30"
-          cols="100"
+          rows="15"
           required
           onChange={(e) => {
             setNewArticleBody(e.target.value);
             setIsPosting(true);
           }}
         />
-        <button type="submit">Post Article</button>
-        {isPosting ? null : <p>Comment Posted Successfully!</p>}
-      </form>
-    </section>
+      </Form.Group>
+
+      <Button type="submit">Post Article</Button>
+      {isPosting ? null : <h4>Article Posted Successfully!</h4>}
+    </Form>
   );
 }
 
