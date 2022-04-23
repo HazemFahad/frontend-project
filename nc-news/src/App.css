@@ -2,41 +2,17 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+  font-family: "Roboto", "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
     "Lucida Sans", Arial, sans-serif;
 }
 
 .App {
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  width: auto;
-  min-height: 600px;
   text-align: center;
-  margin: 128px auto;
-  border-radius: 10px;
-  padding-bottom: 32px;
-  padding: 30px;
-}
-
-.Nav__link,
-.Topic__link {
-  margin: 20px;
-  padding: 10px;
 }
 
 .Nav__Avatar__img {
-  height: 50px;
-  padding: 10px;
-  margin: 20px;
-}
-
-.NavBar {
-  margin: 50px;
-}
-
-.Topic__bar {
-  margin: 50px;
+  height: 30px;
+  border-radius: 50%;
 }
 
 .Article__blurb {
@@ -54,4 +30,31 @@
 
 .Users_card {
   list-style: none;
+}
+.container {
+  width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  font-size: 50px;
+  background: #0d6efd;
+  color: white;
+  cursor: pointer;
+  border-radius: 100px;
+  border: none;
+  box-shadow: 0 5px 10px #ccc;
+}
+
+.back-to-top:hover {
+  background: white;
+  color: #0d6efd;
+}
+
+Form {
+  padding: 15px;
 }

@@ -6,6 +6,7 @@ import useCount from "../Hooks/useCount";
 import { patchArticle } from "../utils/api";
 import CommentList from "./CommentList";
 import PostComment from "./PostComment";
+import { Button, Card, ButtonGroup } from "react-bootstrap";
 
 function ArticleFull() {
   const [article, setArticle] = useState({});
@@ -47,27 +48,43 @@ function ArticleFull() {
   }
   return (
     <section className="Full__article">
-      <h3>{article.title}</h3>
-      <p>{article.body}</p>
-      <p>Votes: {voteCount.count}</p>
-      <p>Topic: {article.topic}</p>
-      <button
-        onClick={() => {
-          updateVotes(params.article_id, 1);
-        }}
-      >
-        Upvote
-      </button>
-      <button
-        onClick={() => {
-          updateVotes(params.article_id, -1);
-        }}
-      >
-        Downvote
-      </button>
-      <Link to={topicLink} className="Topic__link">
-        <button>Related Articles</button>
-      </Link>
+      <Card bg="light" text="dark" className="Article__full">
+        <Card.Header>{article.title}</Card.Header>
+        <Card.Text>{article.body}</Card.Text>
+        <Card.Text>
+          <b>Votes:</b>
+          {voteCount.count} | <b>Topic:</b> {article.topic} | <b>Author</b>:
+          {article.author} | <b>CommentCount: </b>
+          {article.comment_count}
+        </Card.Text>
+        <ButtonGroup>
+          <Button
+            variant="success"
+            onClick={() => {
+              updateVotes(params.article_id, 1);
+            }}
+          >
+            Upvote
+          </Button>
+          <Button
+            variant="danger"
+            onClick={() => {
+              updateVotes(params.article_id, -1);
+            }}
+          >
+            Downvote
+          </Button>
+          <Button
+            variant="secondary"
+            as={Link}
+            to={topicLink}
+            className="Topic__link"
+          >
+            Related Articles
+          </Button>
+        </ButtonGroup>
+      </Card>
+
       <PostComment />
       <CommentList />
     </section>

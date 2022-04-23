@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import { useParams } from "react-router-dom";
-import TopicBar from "./TopicBar";
+import { Card, Button, ButtonGroup, Form, Row, Col } from "react-bootstrap";
 
 function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
+  const [err, setErr] = useState("");
+  const [showButton, setShowButton] = useState(false);
   const [selectedSortBy, setSelectedSortBy] = useState("created_at");
   const [selectedOrder, setSelectedOrder] = useState("desc");
 
@@ -14,69 +16,112 @@ function ArticleBlurb() {
   const topicParam = params.topic ? `&topic=${params.topic}` : "";
 
   useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.pageYOffset > 300) {
+        setShowButton(true);
+      } else {
+        setShowButton(false);
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     getArticles(topicParam, selectedSortBy, selectedOrder)
       .then((articleArr) => {
         setArticles(articleArr);
       })
       .catch((err) => {
-        console.log(err.response);
+        setErr("No articles match this topic!");
       });
   }, [params, selectedSortBy, selectedOrder, topicParam]);
 
-  console.log(selectedSortBy);
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
 
+  if (err) {
+    return (
+      <section className="Full__article">
+        <p>{err}</p>
+      </section>
+    );
+  }
   return (
     <main>
-      <TopicBar />
-      <section>
-        <label htmlFor="sort__by">Sort By:</label>
+      <Form>
+        <Row>
+          <Col>
+            <Form.Group>
+              <label htmlFor="sort__by">Sort By:</label>
+              <Form.Select
+                value={selectedSortBy}
+                onChange={(e) => {
+                  setSelectedSortBy(e.target.value);
+                }}
+                id="sort__by"
+              >
+                <option value="created_at">Date</option>
+                <option value="comment_count">Comment Count</option>
+                <option value="votes">Votes</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group>
+              <label htmlFor="order">Order:</label>
 
-        <select
-          value={selectedSortBy}
-          onChange={(e) => {
-            setSelectedSortBy(e.target.value);
-          }}
-          id="sort__by"
-        >
-          <option value="created_at">Date</option>
-          <option value="comment_count">Comment Count</option>
-          <option value="votes">Votes</option>
-        </select>
-        <label htmlFor="order">Order:</label>
-
-        <select
-          value={selectedOrder}
-          onChange={(e) => {
-            setSelectedOrder(e.target.value);
-          }}
-          id="order"
-        >
-          <option value="desc">Descending</option>
-          <option value="asc">Ascending</option>
-        </select>
-      </section>
+              <Form.Select
+                value={selectedOrder}
+                onChange={(e) => {
+                  setSelectedOrder(e.target.value);
+                }}
+                id="order"
+              >
+                <option value="desc">Descending</option>
+                <option value="asc">Ascending</option>
+              </Form.Select>
+            </Form.Group>
+          </Col>
+        </Row>
+      </Form>
       <ul>
         {articles.map((article) => {
           const topicLink = `/${article.topic}`;
           const articleLink = `/article/${article.article_id}`;
           return (
             <li key={article.article_id} className="Article__blurb">
-              <h3>{article.title}</h3>
-              <p>{article.body}</p>
-              <p>Votes: {article.votes}</p>
-              <p>Author: {article.author}</p>
-              <p>Topic: {article.topic}</p>
-              <p>Comment Count: {article.comment_count}</p>
-              <Link to={topicLink} className="Topic__link">
-                <button>Related Articles</button>
-              </Link>
-              <Link to={articleLink} className="Article__link">
-                <button>Read Full Article</button>
-              </Link>
+              <Card bg="light" text="dark">
+                <Card.Header>{article.title}</Card.Header>
+                <Card.Text>{article.body}</Card.Text>
+                <Card.Text>
+                  <b>Votes</b>: {article.votes} | <b>Author</b>:{" "}
+                  {article.author} | <b>Topic</b>: {article.topic} |{" "}
+                  <b>CommentCount: </b>
+                  {article.comment_count}
+                </Card.Text>
+                <ButtonGroup>
+                  <Button variant="secondary" as={Link} to={topicLink}>
+                    Related Articles
+                  </Button>
+                  <Button variant="primary" as={Link} to={articleLink}>
+                    Read Full Article
+                  </Button>
+                </ButtonGroup>
+              </Card>
             </li>
           );
         })}
       </ul>
+      <>
+        {showButton && (
+          <button onClick={scrollToTop} className="back-to-top">
+            &#8679;
+          </button>
+        )}
+      </>
     </main>
   );
 }

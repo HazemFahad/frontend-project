@@ -51,8 +51,6 @@ export const getCommentsById = (article_id) => {
 };
 
 export const postComment = (article_id, username, body) => {
-  console.log(article_id, username, body);
-
   return newsApi
 
     .post(`/articles/${article_id}/comments`, {
@@ -60,7 +58,6 @@ export const postComment = (article_id, username, body) => {
       body: body,
     })
     .then(({ data }) => {
-      console.log(data);
       return data;
     });
 };
@@ -69,4 +66,25 @@ export const deleteCommentByID = (id) => {
   return newsApi.delete(`/comments/${id}`).then((response) => {
     console.log(response);
   });
+};
+
+export const deleteArticleByID = (id) => {
+  return newsApi.delete(`/comments/${id}`).then((response) => {
+    console.log(response);
+  });
+};
+
+export const postArticle = (author, title, topic, body) => {
+  return newsApi
+
+    .post(`/articles`, {
+      author: author,
+      title: title,
+      topic: topic,
+      body: body,
+    })
+    .then(({ data }) => {
+      console.log(data.article);
+      return data.article;
+    });
 };
