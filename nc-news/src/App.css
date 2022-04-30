@@ -17,7 +17,7 @@
 
 .Article__blurb {
   margin: 20px;
-  padding: 10px;
+  padding: 0px;
   list-style: none;
 }
 
@@ -53,6 +53,14 @@
 .back-to-top:hover {
   background: white;
   color: #0d6efd;
+}
+.article__list {
+  padding: 0;
+}
+
+.order__sort__form {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 Form {
