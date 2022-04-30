@@ -75,7 +75,7 @@ function NavBar() {
               <img
                 src={user.avatar_url}
                 className="Nav__Avatar__img"
-                alt="Log In"
+                alt="Avatar"
               />
             </Nav.Link>
           </Nav>
