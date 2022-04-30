@@ -51,7 +51,7 @@ function ArticleBlurb() {
   }
   return (
     <main>
-      <Form>
+      <Form className="order__sort__form">
         <Row>
           <Col>
             <Form.Group>
@@ -87,7 +87,7 @@ function ArticleBlurb() {
           </Col>
         </Row>
       </Form>
-      <ul>
+      <ul className="article__list">
         {articles.map((article) => {
           const topicLink = `/${article.topic}`;
           const articleLink = `/article/${article.article_id}`;
