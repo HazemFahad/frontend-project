@@ -24,7 +24,7 @@ function ArticleFull() {
       .catch((err) => {
         setErr("Article not found!");
       });
-  }, [params.article_id]);
+  }, [params.article_id, voteCount]);
 
   console.log();
 
