@@ -1,30 +1,20 @@
 import { useEffect, useState } from "react";
 import { UserContext } from "../Contexts/User";
-import { getUsers, getUserByUsername } from "../utils/api";
+import { getFullUserData } from "../utils/api";
 import { useContext } from "react";
-import { Button, Card } from "react-bootstrap";
+import { Button, Card, Row, Col } from "react-bootstrap";
 
 const Users = () => {
-  const { user, setUser } = useContext(UserContext);
+  const { setUser } = useContext(UserContext);
   const [users, setUsers] = useState([]);
-  const [loggedInUser, setLoggedInUser] = useState(user);
 
   useEffect(() => {
-    getUsers()
+    getFullUserData()
       .then((usersFromApi) => {
         setUsers(usersFromApi);
-        getUserByUsername(loggedInUser);
       })
       .catch((err) => console.log(err));
-  }, [loggedInUser]);
-
-  useEffect(() => {
-    getUserByUsername(loggedInUser)
-      .then((userFromApi) => {
-        setUser(userFromApi);
-      })
-      .catch((err) => console.log(err));
-  }, [loggedInUser, setUser]);
+  }, []);
 
   return (
     <section>
@@ -34,11 +24,18 @@ const Users = () => {
           return (
             <li key={user.username} className="Users_card">
               <Card>
-                <Card.Header>{user.username}</Card.Header>
+                <Card.Header>
+                  <img
+                    src={user.avatar_url}
+                    className="Nav__Avatar__img"
+                    alt="Avatar"
+                  />
+                  {user.username}
+                </Card.Header>
 
                 <Button
                   onClick={() => {
-                    setLoggedInUser(user.username);
+                    setUser(user);
                   }}
                 >
                   Log Me In

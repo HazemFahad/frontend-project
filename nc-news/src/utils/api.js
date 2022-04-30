@@ -11,8 +11,14 @@ export const getUsers = () => {
 };
 
 export const getUserByUsername = (username) => {
-  return newsApi.get(`/users/${username}`).then(({ data }) => {
+  return newsApi.get(`/users/fullusers/${username}`).then(({ data }) => {
     return data.user;
+  });
+};
+
+export const getFullUserData = () => {
+  return newsApi.get("/users/fullusers").then(({ data }) => {
+    return data.users;
   });
 };
 

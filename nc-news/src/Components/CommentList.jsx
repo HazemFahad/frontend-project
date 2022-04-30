@@ -51,7 +51,7 @@ function CommentList() {
         {comments.map((comment) => {
           return (
             <li key={comment.comment_id} className="Article__blurb">
-              <Card Card bg="light" text="dark">
+              <Card bg="light" text="dark">
                 <Card.Text>
                   <b>{comment.author}</b> - {comment.body}
                 </Card.Text>
