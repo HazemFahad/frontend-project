@@ -1,70 +1,87 @@
-# Getting Started with Create React App
+## README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+This is the frontend of my NC-News app.
 
-In the project directory, you can run:
+## What can I do on the app?
 
-### `npm start`
+## Navbar
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Clicking the NC News "logo" will take you back to the homepage.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- "Post Article" will take you to a page to post an article.
 
-### `npm test`
+- "Filter By" will allow you to filter the articles or to remove the filter.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Clicking the username or the avatar will take you to the Users page.
 
-### `npm run build`
+## Home Page
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- The homepage shows a list of all articles. By default these are sorted by date and arranged in descending order. This also shows Votes, Topic, Author and Comment Count.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- The articles can be sorted by "Comment Count" or by "Votes" and arranged in descending or ascending order.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Each article has links to "Related Topics" which will then filter the articles to match only the topic of that article and a "Read Full Article" link which will take you to the page for that particular article.
 
-### `npm run eject`
+- If you scroll down on the home page a small arrow will appear which will take you back to the top of the page.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Single Article Page:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- Shows full article including Votes, Topic, Author and Comment Count.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- Can "upvote" or "downvote" article.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Link to "Related Topics" which will then filter the articles to match only the topic of that article.
 
-## Learn More
+- Text area to write a comment and a button to post that comment.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- Full list of existing comments for that article - including the ability to delete any articles that the logged in user has posted.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Post Article Page:
 
-### Code Splitting
+- Can type article name and article body - topic is a dropdown menu.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- Button to submit article.
 
-### Analyzing the Bundle Size
+- After submitting will appear on homepage.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Users Page:
 
-### Making a Progressive Web App
+- Can click on a users "Log Me In" button to log in as that user and perform any above actions as that user.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Link to App:
 
-### Advanced Configuration
+- Frontend Project -
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Git link: https://github.com/squarezy/nc-news-FE
 
-### Deployment
+Hosted link: https://taupe-biscochitos-afde9f.netlify.app
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Backend Project -
 
-### `npm run build` fails to minify
+Git link: https://github.com/squarezy/be-nc-news
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Hosted link: https://jibinandshwey.herokuapp.com/api
+
+## Node Version:
+
+I used node version v18.0.0 when building this app.
+
+## To Run Repo This Locally:
+
+1. In the terminal change directory to wherever you wanted to clone this folder.
+
+2. In terminal use command:
+
+git clone https://github.com/squarezy/nc-news-FE
+
+3. Once this has completed open the file with a code editor.
+
+4. Once the code editor has opened - open a terminal inside the code editor and run "cd nc-news"
+
+5. Run "npm install" in terminal to install dependencies.
+
+6. Run "npm start" in terminal to open site locally. If not automatically directed - open a browser and navigate to localhost:3000.
+
+Many Thanks!
