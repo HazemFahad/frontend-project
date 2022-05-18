@@ -1,23 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../Contexts/User";
-import { Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { useState, useEffect } from "react";
-import { getTopics } from "../utils/api";
+import { Nav, Navbar } from "react-bootstrap";
 
 function NavBar() {
   const { user } = useContext(UserContext);
-  const [topics, setTopics] = useState([]);
-
-  useEffect(() => {
-    getTopics()
-      .then((topicsArr) => {
-        setTopics(topicsArr);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
 
   return (
     <nav>
@@ -39,30 +26,7 @@ function NavBar() {
             >
               Post Article
             </Nav.Link>
-            <NavDropdown title="Filter By:">
-              {topics.map(({ slug, description }) => {
-                return (
-                  <Nav.Link
-                    as={NavLink}
-                    to={`/${slug}`}
-                    key={`${slug}`}
-                    eventKey="1"
-                  >
-                    {slug}
-                  </Nav.Link>
-                );
-              })}
-              <NavDropdown.Divider />
-              <Nav.Link
-                eventKey="2"
-                as={NavLink}
-                to="/"
-                key="home"
-                className="Topic__link"
-              >
-                Remove Filter
-              </Nav.Link>
-            </NavDropdown>
+
             <Nav.Link
               as={NavLink}
               eventKey="2"

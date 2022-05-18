@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { getArticleById } from "../utils/api";
 import { useParams } from "react-router-dom";
-import useCount from "../Hooks/useCount";
 import { patchArticle } from "../utils/api";
 import CommentList from "./CommentList";
 import PostComment from "./PostComment";
@@ -11,7 +10,7 @@ import { Button, Card, ButtonGroup } from "react-bootstrap";
 function ArticleFull() {
   const [article, setArticle] = useState({});
   const [err, setErr] = useState("");
-  const voteCount = useCount();
+  const [votes, setVotes] = useState(0);
 
   let params = useParams();
 
@@ -19,20 +18,18 @@ function ArticleFull() {
     getArticleById(params.article_id)
       .then((article) => {
         setArticle(article);
-        voteCount.setCount(article.votes);
+        setVotes(article.votes);
       })
       .catch((err) => {
         setErr("Article not found!");
       });
-  }, [params.article_id, voteCount]);
-
-  console.log();
+  }, [params.article_id]);
 
   const updateVotes = (article_id, updateCount) => {
     if (updateCount === 1) {
-      voteCount.incCount();
+      setVotes(votes + 1);
     } else {
-      voteCount.decCount();
+      setVotes(votes - 1);
     }
     patchArticle(article_id, updateCount);
   };
@@ -47,46 +44,50 @@ function ArticleFull() {
     );
   }
   return (
-    <section className="Full__article">
-      <Card bg="light" text="dark" className="Article__full">
-        <Card.Header>{article.title}</Card.Header>
-        <Card.Text>{article.body}</Card.Text>
-        <Card.Text>
-          <b>Votes:</b>
-          {voteCount.count} | <b>Topic:</b> {article.topic} | <b>Author</b>:
-          {article.author} | <b>CommentCount: </b>
-          {article.comment_count}
-        </Card.Text>
-        <ButtonGroup>
-          <Button
-            variant="success"
-            onClick={() => {
-              updateVotes(params.article_id, 1);
-            }}
-          >
-            Upvote
-          </Button>
-          <Button
-            variant="danger"
-            onClick={() => {
-              updateVotes(params.article_id, -1);
-            }}
-          >
-            Downvote
-          </Button>
-          <Button
-            variant="secondary"
-            as={Link}
-            to={topicLink}
-            className="Topic__link"
-          >
-            Related Articles
-          </Button>
-        </ButtonGroup>
-      </Card>
+    <section className="Full__article__container">
+      <div className="Full__article__body">
+        <Card bg="light" text="dark" className="Article__full">
+          <Card.Header>{article.title}</Card.Header>
+          <Card.Text>{article.body}</Card.Text>
+          <Card.Text>
+            <b>Votes:</b>
+            {votes} | <b>Topic:</b> {article.topic} | <b>Author</b>:
+            {article.author} | <b>CommentCount: </b>
+            {article.comment_count}
+          </Card.Text>
+          <ButtonGroup>
+            <Button
+              className="button__group"
+              variant="success"
+              onClick={() => {
+                updateVotes(params.article_id, 1);
+              }}
+            >
+              Upvote
+            </Button>
+            <Button
+              className="button__group"
+              variant="danger"
+              onClick={() => {
+                updateVotes(params.article_id, -1);
+              }}
+            >
+              Downvote
+            </Button>
+            <Button
+              variant="secondary"
+              as={Link}
+              to={topicLink}
+              className="button__group"
+            >
+              Related Articles
+            </Button>
+          </ButtonGroup>
+        </Card>
 
-      <PostComment />
-      <CommentList />
+        <PostComment />
+        <CommentList />
+      </div>
     </section>
   );
 }

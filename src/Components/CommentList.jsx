@@ -21,7 +21,7 @@ function CommentList() {
       .catch((err) => {
         setErr("Comments not found!");
       });
-  }, [article_id, comments]);
+  }, [article_id]);
 
   const deleteComment = (comment_id) => {
     setComments((currComments) => {
@@ -46,33 +46,35 @@ function CommentList() {
     );
   }
   return (
-    <section className="Comment__list">
-      <ul>
-        {comments.map((comment) => {
-          return (
-            <li key={comment.comment_id} className="Article__blurb">
-              <Card bg="light" text="dark">
-                <Card.Text>
-                  <b>{comment.author}</b> - {comment.body}
-                </Card.Text>
-                {comment.author === user.username ? (
-                  <Button
-                    variant="secondary"
-                    onClick={() => {
-                      deleteComment(comment.comment_id);
-                      setIsDeleting(false);
-                    }}
-                  >
-                    Delete Comment
-                  </Button>
-                ) : null}
-                {isDeleting ? null : <p>Please wait - Deleting Comment!</p>}
-              </Card>
-            </li>
-          );
-        })}
-      </ul>
-    </section>
+    <div className="Comment__list__container">
+      <section className="Comment__list">
+        <ul>
+          {comments.map((comment) => {
+            return (
+              <li key={comment.comment_id} className="Comment__item">
+                <Card bg="light" text="dark">
+                  <Card.Text>
+                    <b>{comment.author}</b> - {comment.body}
+                  </Card.Text>
+                  {comment.author === user.username ? (
+                    <Button
+                      variant="secondary"
+                      onClick={() => {
+                        deleteComment(comment.comment_id);
+                        setIsDeleting(false);
+                      }}
+                    >
+                      Delete Comment
+                    </Button>
+                  ) : null}
+                  {isDeleting ? null : <p>Please wait - Deleting Comment!</p>}
+                </Card>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    </div>
   );
 }
 

@@ -66,3 +66,82 @@
 Form {
   padding: 15px;
 }
+
+.post__button {
+  margin: 10px;
+}
+
+.post__label {
+  margin: 20px;
+}
+
+.Full__article__container {
+  margin-top: 30px;
+}
+
+.button__group {
+  width: 33%;
+}
+
+.Comment__list__container {
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.Comment__list {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+.Comment__item {
+  margin: 20px;
+  padding: 0px;
+  list-style: none;
+  /* display: inline-block; */
+  margin-left: -1em;
+}
+
+@media screen and (min-width: 800px) {
+  .Article__blurb {
+    width: 760px;
+    padding: 0px;
+    list-style: none;
+  }
+  .article__list {
+    display: inline-block;
+  }
+
+  .article__container {
+    text-align: center;
+  }
+
+  .form__container {
+    text-align: center;
+  }
+
+  .order__sort__form {
+    width: 760px;
+    display: inline-block;
+  }
+
+  .post__article {
+    width: 760px;
+    display: inline-block;
+  }
+
+  .Full__article__container {
+    text-align: center;
+  }
+
+  .Full__article__body {
+    width: 760px;
+    display: inline-block;
+  }
+
+  .Users__list {
+    width: 760px;
+    display: inline-block;
+  }
+}

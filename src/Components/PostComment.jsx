@@ -49,7 +49,9 @@ function PostComment() {
             }}
           />
 
-          <Button type="submit">Post Comment</Button>
+          <Button className="post__button" type="submit">
+            Post Comment
+          </Button>
           {isPosting ? null : <p>Comment Posted Successfully!</p>}
         </Form.Group>
       </Form>
