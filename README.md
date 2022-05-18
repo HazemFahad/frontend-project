@@ -78,10 +78,8 @@ I used node version v18.0.0 when building this app.
 
 3. Once this has completed open the file with a code editor.
 
-4. Once the code editor has opened - open a terminal inside the code editor and run <code>cd nc-news</code>
+4. Run <code>npm install</code> in terminal to install dependencies.
 
-5. Run <code>npm install</code> in terminal to install dependencies.
-
-6. Run <code>npm start</code> in terminal to open site locally. If not automatically directed - open a browser and navigate to localhost:3000.
+5. Run <code>npm start</code> in terminal to open site locally. If not automatically directed - open a browser and navigate to localhost:3000.
 
 Many Thanks!
