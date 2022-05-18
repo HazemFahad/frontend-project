@@ -54,13 +54,13 @@ This is the frontend of my NC-News app.
 
 - Frontend Project -
 
-Git link: https://github.com/squarezy/nc-news-FE
+Git link: https://github.com/squarezy/frontend-project
 
 Hosted link: https://taupe-biscochitos-afde9f.netlify.app
 
 Backend Project -
 
-Git link: https://github.com/squarezy/be-nc-news
+Git link: https://github.com/squarezy/backend-project
 
 Hosted link: https://jibinandshwey.herokuapp.com/api
 
@@ -74,14 +74,14 @@ I used node version v18.0.0 when building this app.
 
 2. In terminal use command:
 
-git clone https://github.com/squarezy/nc-news-FE
+<code>git clone https://github.com/squarezy/frontend-project</code>
 
 3. Once this has completed open the file with a code editor.
 
-4. Once the code editor has opened - open a terminal inside the code editor and run "cd nc-news"
+4. Once the code editor has opened - open a terminal inside the code editor and run <code>cd nc-news</code>
 
-5. Run "npm install" in terminal to install dependencies.
+5. Run <code>npm install</code> in terminal to install dependencies.
 
-6. Run "npm start" in terminal to open site locally. If not automatically directed - open a browser and navigate to localhost:3000.
+6. Run <code>npm start</code> in terminal to open site locally. If not automatically directed - open a browser and navigate to localhost:3000.
 
 Many Thanks!
