@@ -4,7 +4,6 @@ import { getArticleById } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { patchArticle } from "../utils/api";
 import CommentList from "./CommentList";
-import PostComment from "./PostComment";
 import { Button, Card, ButtonGroup } from "react-bootstrap";
 
 function ArticleFull() {
@@ -85,7 +84,6 @@ function ArticleFull() {
           </ButtonGroup>
         </Card>
 
-        <PostComment />
         <CommentList />
       </div>
     </section>

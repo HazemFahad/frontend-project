@@ -3,7 +3,16 @@ import { Link } from "react-router-dom";
 import { getArticles } from "../utils/api";
 import { useParams } from "react-router-dom";
 import { getTopics } from "../utils/api";
-import { Card, Button, ButtonGroup, Form, Row, Col } from "react-bootstrap";
+import {
+  Card,
+  Button,
+  ButtonGroup,
+  Form,
+  Row,
+  Col,
+  DropdownButton,
+  Dropdown,
+} from "react-bootstrap";
 
 function ArticleBlurb() {
   const [articles, setArticles] = useState([]);
@@ -11,7 +20,6 @@ function ArticleBlurb() {
   const [showButton, setShowButton] = useState(false);
   const [selectedSortBy, setSelectedSortBy] = useState("created_at");
   const [selectedOrder, setSelectedOrder] = useState("desc");
-  const [selectedFilter, setSelectedFilter] = useState("");
 
   const [topics, setTopics] = useState([]);
 
@@ -26,6 +34,8 @@ function ArticleBlurb() {
   }, []);
 
   const params = useParams();
+
+  const topicParam = params.topic ? `&topic=${params.topic}` : "";
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -42,15 +52,14 @@ function ArticleBlurb() {
   }, []);
 
   useEffect(() => {
-    getArticles(selectedFilter, selectedSortBy, selectedOrder)
+    getArticles(topicParam, selectedSortBy, selectedOrder)
       .then((articleArr) => {
         setArticles(articleArr);
       })
       .catch((err) => {
-        console.log(selectedFilter, selectedSortBy, selectedOrder);
         setErr("No articles match this topic!");
       });
-  }, [params, selectedSortBy, selectedOrder, selectedFilter]);
+  }, [params, selectedSortBy, selectedOrder, topicParam]);
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -104,29 +113,34 @@ function ArticleBlurb() {
               </Form.Group>
             </Col>
             <Col>
-              {" "}
               <label htmlFor="filter">Filter By Topic:</label>
-              <Form.Select
-                onChange={(e) => {
-                  setSelectedFilter(
-                    e.target.value ? `&topic=${e.target.value}` : ""
-                  );
-                }}
-                id="filter"
+              <DropdownButton
+                variant="secondary"
+                className="dropdown"
+                title="Topic:"
               >
-                <option value="">No Filter</option>
                 {topics.map(({ slug }) => {
                   return (
-                    <option key={slug} value={slug}>
+                    <Dropdown.Item href={`/${slug}`}>
                       {capitalizeFirstLetter(slug)}
-                    </option>
+                    </Dropdown.Item>
                   );
                 })}
-              </Form.Select>
+
+                <Dropdown.Divider />
+                <Dropdown.Item href={`/`}>Remove Filter</Dropdown.Item>
+              </DropdownButton>
             </Col>
           </Row>
         </Form>
       </div>
+      {topicParam ? (
+        <Button variant="secondary" href={`/`}>
+          Remove Filter
+        </Button>
+      ) : (
+        <></>
+      )}
       <div className="article__container">
         <ul className="article__list">
           {articles.map((article) => {
