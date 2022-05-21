@@ -121,21 +121,23 @@ function ArticleBlurb() {
               >
                 {topics.map(({ slug }) => {
                   return (
-                    <Dropdown.Item href={`/${slug}`}>
+                    <Dropdown.Item as={Link} to={`/${slug}`}>
                       {capitalizeFirstLetter(slug)}
                     </Dropdown.Item>
                   );
                 })}
 
                 <Dropdown.Divider />
-                <Dropdown.Item href={`/`}>Remove Filter</Dropdown.Item>
+                <Dropdown.Item as={Link} to={`/`}>
+                  Remove Filter
+                </Dropdown.Item>
               </DropdownButton>
             </Col>
           </Row>
         </Form>
       </div>
       {topicParam ? (
-        <Button variant="secondary" href={`/`}>
+        <Button variant="secondary" as={Link} to={`/`}>
           Remove Filter
         </Button>
       ) : (
