@@ -1,22 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { getCommentsById, deleteCommentByID } from "../utils/api";
 import { UserContext } from "../Contexts/User";
-import { useContext } from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Form } from "react-bootstrap";
+import { postComment } from "../utils/api";
 
 function CommentList() {
   const [comments, setComments] = useState([]);
   const [err, setErr] = useState("");
   const [isDeleting, setIsDeleting] = useState(true);
   const { user } = useContext(UserContext);
+  const [newCommentBody, setNewCommentBody] = useState("");
+  const [newComment, setNewComment] = useState("");
+
+  const [isPosting, setIsPosting] = useState(true);
 
   const { article_id } = useParams();
 
   useEffect(() => {
     getCommentsById(article_id)
       .then((commentsFromApi) => {
-        setComments(commentsFromApi);
+        setComments(commentsFromApi.reverse());
       })
       .catch((err) => {
         setErr("Comments not found!");
@@ -38,6 +42,20 @@ function CommentList() {
       });
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setNewComment(newCommentBody);
+
+    postComment(article_id, user.username, newCommentBody)
+      .then(() => {
+        setIsPosting(false);
+        setNewCommentBody("");
+      })
+      .catch((err) => {
+        setErr("Could not submit comment - Please try again!");
+      });
+  };
+
   if (err) {
     return (
       <section className="Comment__list">
@@ -47,8 +65,42 @@ function CommentList() {
   }
   return (
     <div className="Comment__list__container">
+      <section className="Post_comment">
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Control
+              as="textarea"
+              value={newCommentBody}
+              placeholder="Write Comment Here!"
+              rows="4"
+              cols="50"
+              required
+              onChange={(e) => {
+                setNewCommentBody(e.target.value);
+                setIsPosting(true);
+              }}
+            />
+
+            <Button className="post__button" type="submit">
+              Post Comment
+            </Button>
+            {isPosting ? null : <p>Comment Posted Successfully!</p>}
+          </Form.Group>
+        </Form>
+      </section>
       <section className="Comment__list">
         <ul>
+          {newComment ? (
+            <li className="Comment__item">
+              <Card bg="light" text="dark">
+                <Card.Text>
+                  <b>{user.username}</b> - {newComment}
+                </Card.Text>
+              </Card>
+            </li>
+          ) : (
+            <></>
+          )}
           {comments.map((comment) => {
             return (
               <li key={comment.comment_id} className="Comment__item">
