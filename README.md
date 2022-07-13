@@ -54,13 +54,13 @@ This is the frontend of my NC-News app.
 
 - Frontend Project -
 
-Git link: https://github.com/squarezy/frontend-project
+Git link: https://github.com/hazemfahad/frontend-project
 
 Hosted link: https://taupe-biscochitos-afde9f.netlify.app
 
 Backend Project -
 
-Git link: https://github.com/squarezy/backend-project
+Git link: https://github.com/hazemfahad/backend-project
 
 Hosted link: https://jibinandshwey.herokuapp.com/api
 
@@ -74,7 +74,7 @@ I used node version v18.0.0 when building this app.
 
 2. In terminal use command:
 
-<code>git clone https://github.com/squarezy/frontend-project</code>
+<code>git clone https://github.com/hazemfahad/frontend-project</code>
 
 3. Once this has completed open the file with a code editor.
 
