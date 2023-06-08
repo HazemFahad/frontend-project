@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const newsApi = axios.create({
-  baseURL: "https://jibinandshwey.herokuapp.com/api",
+  baseURL: "https://backend-nc-news.herokuapp.com/api",
 });
 
 export const getUsers = () => {
